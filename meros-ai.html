@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Meros-AI — Uzbekistan Heritage Guide</title>
+<meta name="theme-color" content="#0F2942">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://en.wikipedia.org" crossorigin>
+<link rel="preconnect" href="https://upload.wikimedia.org" crossorigin>
+<link rel="preconnect" href="https://generativelanguage.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF8F5;--ink:#0F2942;--ink2:#415a73;--lapis:#0F2942;--teal:#0D9488;--gold:#D97706;
+  --card:rgba(255,255,255,.62);--line:rgba(15,41,66,.12);--r:22px;
+  --sans:'Plus Jakarta Sans','Inter',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;
+  --sidebar:248px;--bottom:68px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;opacity:.07;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%230F2942' stroke-width='1.2'%3E%3Cpath d='M48 6l9 21 21-9-9 21 21 9-21 9 9 21-21-9-9 21-9-21-21 9 9-21-21-9 21-9-9-21 21 9z'/%3E%3Ccircle cx='48' cy='48' r='13'/%3E%3Cpath d='M0 0l12 12M96 0L84 12M0 96l12-12M96 96L84 84'/%3E%3C/g%3E%3C/svg%3E")}
+body::after{content:"";position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(900px 500px at 85% -10%,rgba(13,148,136,.16),transparent 60%),
+  radial-gradient(700px 500px at -10% 10%,rgba(217,119,6,.13),transparent 60%),var(--bg)}
+button{font:inherit;cursor:pointer;border:0;color:inherit;background:none}
+h1,h2,h3{margin:0}
+.serif{font-family:var(--serif)}
+
+/* layout */
+.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 16px;
+  background:rgba(250,248,245,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.3px}
+.logo i{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;color:#fff;font-style:normal;
+  background:linear-gradient(135deg,var(--lapis),var(--teal));box-shadow:0 6px 16px rgba(13,148,136,.35)}
+.logo b{color:var(--gold)}
+.sp{flex:1}
+.lang{display:flex;background:rgba(15,41,66,.07);border-radius:999px;padding:3px}
+.lang button{padding:6px 11px;border-radius:999px;font-size:12px;font-weight:700;color:var(--ink2);transition:.2s}
+.lang button.on{background:var(--lapis);color:#fff;box-shadow:0 3px 10px rgba(15,41,66,.3)}
+.iconbtn{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(15,41,66,.07)}
+.iconbtn:hover{background:rgba(15,41,66,.13)}
+.side{position:fixed;left:0;top:59px;bottom:0;width:var(--sidebar);padding:18px 14px;display:none;flex-direction:column;gap:6px;border-right:1px solid var(--line);background:rgba(255,255,255,.35);backdrop-filter:blur(10px)}
+.side button{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;font-weight:600;color:var(--ink2);text-align:left;transition:.2s}
+.side button:hover{background:rgba(15,41,66,.06)}
+.side button.on{background:var(--lapis);color:#fff;box-shadow:0 8px 20px rgba(15,41,66,.25)}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:30;height:var(--bottom);padding-bottom:env(safe-area-inset-bottom);display:flex;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--line)}
+.bottom button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10.5px;font-weight:700;color:var(--ink2)}
+.bottom button.on{color:var(--teal)}
+.bottom button.on svg{transform:translateY(-2px) scale(1.1)}
+.bottom svg,.side svg{transition:.25s}
+main{padding:18px 16px calc(var(--bottom) + 120px);max-width:980px;margin:0 auto}
+@media(min-width:900px){.side{display:flex}.bottom{display:none}main{margin-left:var(--sidebar);max-width:none;padding:28px 40px 140px}main>.wrap{max-width:900px;margin:0 auto}}
+
+.enter{animation:up .45s cubic-bezier(.2,.8,.2,1) both}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.glass{background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.7);border-radius:var(--r);
+  box-shadow:0 10px 30px rgba(15,41,66,.08),inset 0 1px 0 rgba(255,255,255,.8)}
+.pad{padding:18px}
+.h-title{font-family:var(--serif);font-size:clamp(26px,5vw,38px);font-weight:700;line-height:1.1;margin-bottom:6px}
+.sub{color:var(--ink2);font-size:14px;margin:0 0 16px}
+.label{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:14px;font-weight:700;font-size:14px;transition:.2s}
+.btn.pri{background:linear-gradient(135deg,var(--lapis),#17426b);color:#fff;box-shadow:0 8px 20px rgba(15,41,66,.28)}
+.btn.pri:hover{transform:translateY(-1px)}
+.btn.gold{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#fff;box-shadow:0 8px 20px rgba(217,119,6,.3)}
+.btn.ghost{background:rgba(15,41,66,.07)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.75);border:1px solid var(--line);font-size:13px;font-weight:600;white-space:nowrap;transition:.2s}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.04em}
+.b-gold{background:rgba(217,119,6,.14);color:#a85a04}.b-teal{background:rgba(13,148,136,.14);color:#0b6f66}.b-lapis{background:rgba(15,41,66,.1);color:var(--lapis)}
+
+/* guides carousel */
+.carousel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
+.carousel::-webkit-scrollbar{display:none}
+.guide{flex:0 0 200px;scroll-snap-align:start;padding:14px;text-align:left;border-radius:20px;background:var(--card);border:2px solid transparent;box-shadow:0 8px 24px rgba(15,41,66,.08);transition:.25s;backdrop-filter:blur(12px)}
+.guide.on{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 14px 30px rgba(13,148,136,.25)}
+.guide svg{width:64px;height:64px;display:block;margin-bottom:10px}
+.guide b{display:block;font-size:14.5px;line-height:1.2}
+.guide small{display:block;color:var(--ink2);font-size:12px;margin:4px 0 8px;line-height:1.35}
+@media(min-width:900px){.carousel{margin:0}}
+
+/* scanner */
+.drop{border:2px dashed rgba(15,41,66,.28);border-radius:26px;padding:30px 18px;text-align:center;transition:.25s;background:rgba(255,255,255,.45)}
+.drop.over{border-color:var(--teal);background:rgba(13,148,136,.09);transform:scale(1.01)}
+.drop .ring{width:74px;height:74px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--teal),var(--lapis));box-shadow:0 0 0 8px rgba(13,148,136,.12)}
+.demos{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:700px){.demos{grid-template-columns:repeat(4,1fr)}}
+.demo{position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;color:#fff;text-align:left;box-shadow:0 10px 26px rgba(15,41,66,.2);transition:.3s}
+.demo:hover{transform:translateY(-4px) scale(1.015)}
+.demo svg{position:absolute;inset:0;width:100%;height:100%}
+.demo span{position:absolute;left:12px;right:12px;bottom:12px;font-family:var(--serif);font-weight:700;font-size:17px;line-height:1.15;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.demo em{position:absolute;left:12px;top:12px;font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.08em;background:rgba(255,255,255,.22);backdrop-filter:blur(8px);padding:4px 9px;border-radius:99px}
+.preview{width:100%;max-height:300px;object-fit:cover;border-radius:18px;display:block}
+.disc h2{font-family:var(--serif);font-size:30px;margin:10px 0 4px}
+.secret{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:14.5px;line-height:1.5}
+.secret i{flex:0 0 26px;height:26px;border-radius:9px;background:linear-gradient(135deg,var(--gold),#f59e0b);color:#fff;font-style:normal;font-weight:800;display:grid;place-items:center;font-size:12px}
+
+/* player */
+#player{position:fixed;left:12px;right:12px;bottom:calc(var(--bottom) + 10px + env(safe-area-inset-bottom));z-index:40;display:none;align-items:center;gap:12px;padding:10px 12px;border-radius:20px;
+  background:rgba(15,41,66,.94);color:#fff;backdrop-filter:blur(16px);box-shadow:0 16px 40px rgba(15,41,66,.45);max-width:640px;margin:0 auto}
+#player.show{display:flex;animation:up .35s both}
+@media(min-width:900px){#player{bottom:20px;left:calc(var(--sidebar) + 20px)}}
+#player .pp{width:44px;height:44px;border-radius:50%;background:var(--teal);display:grid;place-items:center;flex:0 0 44px}
+#player .meta{flex:1;min-width:0}
+#player .meta b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#player .meta small{opacity:.65;font-size:11px}
+.viz{display:flex;align-items:center;gap:2px;height:22px;margin-top:3px}
+.viz s{display:block;width:3px;border-radius:2px;background:linear-gradient(var(--teal),#5eead4);height:4px}
+.playing .viz s{animation:bar .9s ease-in-out infinite alternate}
+@keyframes bar{from{height:3px}to{height:20px}}
+.spd{padding:7px 10px;border-radius:10px;background:rgba(255,255,255,.14);font-weight:800;font-size:12px}
+.xbtn{opacity:.6;padding:6px}
+
+/* chat */
+.chatbox{display:flex;flex-direction:column;gap:12px;min-height:260px;padding:6px 2px}
+.msg{max-width:86%;padding:12px 15px;border-radius:20px;font-size:14.5px;line-height:1.55;animation:up .3s both;word-wrap:break-word}
+.msg.u{align-self:flex-end;background:var(--lapis);color:#fff;border-bottom-right-radius:6px}
+.msg.a{align-self:flex-start;background:rgba(255,255,255,.85);border:1px solid var(--line);border-bottom-left-radius:6px}
+.msg .spk{display:inline-flex;margin-top:6px;font-size:12px;font-weight:700;color:var(--teal);gap:5px;align-items:center}
+.typing span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ink2);margin:0 2px;animation:dot 1s infinite}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.composer{display:flex;gap:10px;align-items:center}
+.composer input,.field{flex:1;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.85);font:inherit;font-size:15px;color:var(--ink);outline:0}
+.composer input:focus,.field:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(13,148,136,.15)}
+.orbwrap{display:flex;justify-content:center;padding:14px 0 4px}
+.orb{position:relative;width:78px;height:78px;border-radius:50%;display:grid;place-items:center;color:#fff;background:radial-gradient(circle at 30% 25%,#5eead4,var(--teal) 45%,var(--lapis));box-shadow:0 10px 30px rgba(13,148,136,.45)}
+.orb::before,.orb::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--teal);opacity:0;animation:pulse 2.4s infinite}
+.orb::after{animation-delay:1.2s}
+.orb.live{background:radial-gradient(circle at 30% 25%,#fcd34d,var(--gold) 50%,#92400e)}
+.orb.live::before,.orb.live::after{border-color:var(--gold);animation-duration:1.1s}
+@keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.7);opacity:0}}
+
+/* route */
+.grid2{display:grid;gap:14px}
+@media(min-width:760px){.grid2{grid-template-columns:1fr 1fr}}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.city{position:relative;flex:1 1 45%;height:112px;padding:12px;border-radius:18px;font-weight:800;font-size:16px;color:#fff;overflow:hidden;
+  background:linear-gradient(135deg,var(--lapis),var(--teal)) center/cover no-repeat;border:3px solid transparent;text-align:left;display:flex;align-items:flex-end;transition:.25s;box-shadow:0 8px 20px rgba(15,41,66,.15)}
+.city::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,25,41,.78),rgba(10,25,41,.05) 65%)}
+.city span{position:relative;font-family:var(--serif);text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.city:hover{transform:translateY(-2px)}
+.city.on{border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,119,6,.25),0 10px 24px rgba(217,119,6,.3)}
+.city.on::after{content:"✓";position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:var(--gold);display:grid;place-items:center;font-size:13px}
+.hero{position:relative;height:170px;border-radius:18px;overflow:hidden;margin-bottom:14px;background:linear-gradient(135deg,var(--lapis),var(--teal)) center/cover no-repeat}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,25,41,.7),transparent 60%)}
+.hero b{position:absolute;left:16px;bottom:12px;color:#fff;font-family:var(--serif);font-size:26px;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.credit{font-size:10.5px;color:var(--ink2);opacity:.7;margin-top:8px}
+.tl{position:relative;margin-top:10px;padding-left:34px}
+.tl::before{content:"";position:absolute;left:13px;top:10px;bottom:10px;width:3px;border-radius:3px;background:linear-gradient(var(--teal),var(--gold))}
+.stop{position:relative;margin-bottom:12px;animation:up .45s both}
+.stop .dot{position:absolute;left:-34px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--lapis);color:#fff;font-weight:800;font-size:12px;display:grid;place-items:center;border:3px solid var(--bg)}
+.walk{margin:-2px 0 12px;font-size:12px;font-weight:700;color:var(--teal)}
+.tip{margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(217,119,6,.1);font-size:13px;color:#8a4a03;line-height:1.45}
+.mapsvg{width:100%;height:auto;border-radius:18px;background:linear-gradient(160deg,rgba(13,148,136,.09),rgba(217,119,6,.09))}
+
+/* passport */
+.passport{background:linear-gradient(145deg,#0F2942,#16406b);color:#fff;border-radius:26px;padding:22px;position:relative;overflow:hidden;box-shadow:0 18px 40px rgba(15,41,66,.35)}
+.passport::after{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;border:2px solid rgba(217,119,6,.5);box-shadow:0 0 0 18px rgba(217,119,6,.08)}
+.bar{height:10px;border-radius:9px;background:rgba(255,255,255,.18);overflow:hidden;margin-top:12px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),#fcd34d);transition:width .8s}
+.stamps{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:700px){.stamps{grid-template-columns:repeat(4,1fr)}}
+.stamp{padding:14px 10px;border-radius:18px;text-align:center;background:rgba(255,255,255,.6);border:1.5px dashed rgba(15,41,66,.25);transition:.3s}
+.stamp svg{width:56px;height:56px;opacity:.28;filter:grayscale(1)}
+.stamp b{display:block;font-size:12.5px;margin-top:6px;line-height:1.2}
+.stamp.got{border:2px solid var(--gold);background:rgba(217,119,6,.08);transform:rotate(-1.5deg)}
+.stamp.got svg{opacity:1;filter:none}
+.coupon{display:flex;gap:14px;align-items:center;padding:14px;border-radius:18px;background:rgba(255,255,255,.7);border-left:6px solid var(--gold);margin-bottom:10px}
+.coupon.lock{opacity:.5;border-left-color:#999}
+.opt{display:block;width:100%;text-align:left;padding:12px 14px;margin-top:8px;border-radius:14px;background:rgba(255,255,255,.8);border:1.5px solid var(--line);font-weight:600;font-size:14px}
+.opt.ok{background:rgba(13,148,136,.18);border-color:var(--teal)}.opt.no{background:rgba(220,38,38,.12);border-color:#dc2626}
+
+/* skeleton / toast / modal */
+.sk{border-radius:14px;background:linear-gradient(90deg,rgba(15,41,66,.06) 25%,rgba(15,41,66,.13) 50%,rgba(15,41,66,.06) 75%);background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+#toasts{position:fixed;top:68px;left:50%;transform:translateX(-50%);z-index:100;display:flex;flex-direction:column;gap:8px;width:min(92vw,420px);pointer-events:none}
+.toast{padding:12px 16px;border-radius:14px;color:#fff;font-size:13.5px;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.25);animation:up .3s both;background:var(--lapis);display:flex;gap:10px;align-items:flex-start}
+.toast.err{background:#b91c1c}.toast.ok{background:var(--teal)}.toast.warn{background:#b45309}
+.modal{position:fixed;inset:0;z-index:90;background:rgba(15,41,66,.55);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:18px}
+.modal.show{display:flex}
+.modal .box{width:100%;max-width:460px;background:var(--bg);border-radius:26px;padding:24px;animation:up .35s both;max-height:92vh;overflow:auto}
+video#cam{width:100%;border-radius:18px;background:#000;max-height:60vh}
+.ph{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .5s}
+.ph.ph-on{opacity:1}
+.demo .ph{box-shadow:inset 0 -110px 70px -40px rgba(10,25,41,.9)}
+.sph{position:relative;width:56px;height:56px;margin:0 auto;border-radius:50%;overflow:hidden;opacity:.35;filter:grayscale(1)}
+.stamp.got .sph{opacity:1;filter:none}
+.sph svg{opacity:1!important;filter:none!important;width:100%!important;height:100%!important;position:absolute;inset:0}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="logo"><i>◈</i><span>Meros<b>-AI</b></span></div>
+  <div class="sp"></div>
+  <div class="lang" id="lang">
+    <button data-l="uz">UZ</button><button data-l="en">EN</button><button data-l="ru">RU</button>
+  </div>
+  <button class="iconbtn" id="keyBtn" title="API key" aria-label="API key">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></svg>
+  </button>
+</header>
+
+<nav class="side" id="side"></nav>
+<main><div class="wrap" id="view"></div></main>
+<nav class="bottom" id="bottom"></nav>
+
+<div id="player">
+  <button class="pp" id="ppBtn" aria-label="play"></button>
+  <div class="meta"><b id="plTitle"></b><div class="viz" id="viz"></div></div>
+  <button class="spd" id="spdBtn">1x</button>
+  <button class="xbtn" id="plClose" aria-label="close">✕</button>
+</div>
+
+<div id="toasts"></div>
+
+<div class="modal" id="keyModal"><div class="box">
+  <div class="label">GEMINI_API_KEY</div>
+  <h2 class="serif" style="font-size:26px;margin-bottom:8px" id="kmTitle"></h2>
+  <p class="sub" id="kmText"></p>
+  <input class="field" id="keyInput" type="password" placeholder="AIza… / AQ.…" autocomplete="off" style="width:100%">
+  <div style="display:flex;gap:10px;margin-top:14px">
+    <button class="btn pri" id="keySave" style="flex:1"></button>
+    <button class="btn ghost" id="keyClear"></button>
+  </div>
+</div></div>
+
+<div class="modal" id="camModal"><div class="box">
+  <video id="cam" autoplay playsinline muted></video>
+  <div style="display:flex;gap:10px;margin-top:14px">
+    <button class="btn gold" id="camShot" style="flex:1">📸</button>
+    <button class="btn ghost" id="camClose">✕</button>
+  </div>
+</div></div>
+
+<script>
+/* =========================================================
+   Meros-AI — single-file app. Gemini model: gemini-2.5-flash
+   The API key is NEVER hard-coded: it is entered by the user
+   (or injected as window.MEROS_KEY by your host) and kept in
+   this browser's localStorage only.
+   ========================================================= */
+/* Google retired gemini-2.5-flash for new users; the app tries newer models automatically and remembers the one that works. */
+const MODELS=['gemini-3.8-flash','gemini-flash-latest','gemini-2.5-flash'];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const md=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+const getKey=()=>window.MEROS_KEY||(()=>{try{return localStorage.getItem('meros_key')||''}catch{return''}})();
+
+/* ---------- i18n ---------- */
+const T={
+en:{tabs:['Scanner','Concierge','Route Planner','Passport'],
+ chooseGuide:'Choose your guide',chooseSub:'Each guide tells the story of Uzbekistan in a different voice.',
+ scanT:'Scan & Listen',scanS:'Photograph any monument, mosaic, calligraphy or museum artifact.',
+ drop:'Drag & drop a photo here',or:'or',upload:'Upload photo',camera:'Live camera',demoT:'Try an instant demo',
+ era:'Historical era',style:'Architecture style',secrets:'Key secrets',listen:'Listen',analyzing:'Analyzing with Gemini…',
+ chatT:'Live Concierge',chatS:'Ask anything — or tap the orb and just talk while you walk.',ph:'Ask your guide…',
+ chips:['Tell me a hidden secret here','Translate the Arabic calligraphy','Best authentic food within 500m','Photo spots nearby'],
+ hello:'Salom! I am your guide. Where are we exploring today?',tap:'Tap to speak',listening:'Listening…',
+ routeT:'Smart Route Planner',routeS:'A walking itinerary built by AI around your time, budget and passions.',
+ city:'City',dur:'Duration',budget:'Budget',interests:'Interests',gen:'Generate my route',
+ durs:['Half-day','1 Day','3 Days'],ints:['Architecture','Food','Crafts','Hidden Gems'],
+ cities:{Samarkand:'Samarkand',Bukhara:'Bukhara',Khiva:'Khiva',Tashkent:'Tashkent'},
+ walk:'walk',tip:'Insider tip',total:'Total walking',map:'Route map',
+ passT:'Digital Heritage Passport',passS:'Scan or visit monuments to collect stamps, level up and unlock artisan coupons.',
+ level:'Level',levels:['Traveler','Explorer','Scholar','Heritage Master'],stampsT:'Your stamps',coupons:'Artisan coupons',
+ trivia:'Heritage trivia',newQ:'New question',visited:'I visited',stamped:'Stamped',need:'stamps needed',xp:'XP',
+ keyT:'Connect Gemini',keyX:'Paste your GEMINI_API_KEY. It is stored only in this browser and sent only to Google.',save:'Save key',clear:'Remove',
+ noKey:'Add your Gemini API key first.',saved:'API key saved',cleared:'API key removed',
+ micSecure:'Microphone needs a secure page. Open this app from an https:// link in Chrome (not from a file or Telegram).',micDenied:'Microphone blocked. Allow it in the browser site settings, then try again.',errBusy:'Gemini is busy right now. Please try again in a few seconds.',errQuota:'Gemini quota reached — try again in a minute.',errKey:'Gemini rejected the API key. Check it in settings.',errNet:'Network problem. Please retry.',errGen:'Something went wrong.',
+ notImg:'Please choose an image file.',noVoice:'Speech recognition is not supported in this browser (try Chrome).',camErr:'Camera unavailable — upload a photo instead.',
+ stampNew:'New stamp collected!',correct:'Correct! +20 XP',wrong:'Not quite',bad:'The AI could not identify a heritage object. Try a clearer photo.',
+ sys:'Reply in English.',vl:'en-US'},
+uz:{tabs:['Skaner','Konsyerj','Marshrut','Pasport'],
+ chooseGuide:'Gidingizni tanlang',chooseSub:'Har bir gid O‘zbekiston tarixini o‘z ovozida hikoya qiladi.',
+ scanT:'Skanerlang va tinglang',scanS:'Istalgan obida, mozaika, xattotlik yoki muzey eksponatini suratga oling.',
+ drop:'Rasmni shu yerga tashlang',or:'yoki',upload:'Rasm yuklash',camera:'Jonli kamera',demoT:'Tezkor demo sinab ko‘ring',
+ era:'Tarixiy davr',style:'Me’moriy uslub',secrets:'Asosiy sirlar',listen:'Tinglash',analyzing:'Gemini tahlil qilmoqda…',
+ chatT:'Jonli konsyerj',chatS:'Xohlagan narsani so‘rang yoki sharni bosib, yurib gaplashing.',ph:'Gidingizdan so‘rang…',
+ chips:['Bu yerdagi yashirin sirni ayting','Arabcha xattotlikni tarjima qiling','500 m ichidagi haqiqiy taomlar','Yaqin atrofdagi foto joylar'],
+ hello:'Salom! Men sizning gidingizman. Bugun qayerni kashf etamiz?',tap:'Gapirish uchun bosing',listening:'Tinglayapman…',
+ routeT:'Aqlli marshrut rejalashtirgich',routeS:'Vaqt, byudjet va qiziqishlaringizga mos AI piyoda marshruti.',
+ city:'Shahar',dur:'Davomiyligi',budget:'Byudjet',interests:'Qiziqishlar',gen:'Marshrut yaratish',
+ durs:['Yarim kun','1 kun','3 kun'],ints:['Me’morchilik','Taomlar','Hunarmandchilik','Yashirin joylar'],
+ cities:{Samarkand:'Samarqand',Bukhara:'Buxoro',Khiva:'Xiva',Tashkent:'Toshkent'},
+ walk:'piyoda',tip:'Maslahat',total:'Jami piyoda',map:'Marshrut xaritasi',
+ passT:'Raqamli meros pasporti',passS:'Obidalarni skanerlab shtamp yig‘ing, daraja oshiring, hunarmand kuponlarini oching.',
+ level:'Daraja',levels:['Sayyoh','Kashfiyotchi','Olim','Meros ustasi'],stampsT:'Shtamplaringiz',coupons:'Hunarmand kuponlari',
+ trivia:'Meros viktorinasi',newQ:'Yangi savol',visited:'Bordim',stamped:'Shtamp bosildi',need:'ta shtamp kerak',xp:'XP',
+ keyT:'Gemini ulash',keyX:'GEMINI_API_KEY ni kiriting. U faqat shu brauzerda saqlanadi va faqat Google’ga yuboriladi.',save:'Saqlash',clear:'O‘chirish',
+ noKey:'Avval Gemini API kalitini kiriting.',saved:'API kalit saqlandi',cleared:'API kalit o‘chirildi',
+ micSecure:'Mikrofon uchun xavfsiz sahifa kerak. Ilovani fayldan yoki Telegramdan emas, Chrome’da https:// havola orqali oching.',micDenied:'Mikrofon bloklangan. Brauzer sozlamalarida ruxsat bering va qayta urinib ko‘ring.',errBusy:'Gemini hozir band. Bir necha soniyadan so‘ng qayta urinib ko‘ring.',errQuota:'Gemini limiti tugadi — bir daqiqadan so‘ng urinib ko‘ring.',errKey:'Gemini API kalitni rad etdi. Sozlamalarda tekshiring.',errNet:'Tarmoq muammosi. Qayta urinib ko‘ring.',errGen:'Xatolik yuz berdi.',
+ notImg:'Iltimos, rasm faylini tanlang.',noVoice:'Bu brauzerda ovozni aniqlash yo‘q (Chrome ishlating).',camErr:'Kamera mavjud emas — rasm yuklang.',
+ stampNew:'Yangi shtamp yig‘ildi!',correct:'To‘g‘ri! +20 XP',wrong:'Unchalik emas',bad:'AI meros obyektini aniqlay olmadi. Aniqroq rasm yuboring.',
+ sys:'Reply in Uzbek (Latin script).',vl:'uz-UZ'},
+ru:{tabs:['Сканер','Консьерж','Маршрут','Паспорт'],
+ chooseGuide:'Выберите гида',chooseSub:'Каждый гид рассказывает об Узбекистане по-своему.',
+ scanT:'Сканируйте и слушайте',scanS:'Сфотографируйте памятник, мозаику, каллиграфию или музейный экспонат.',
+ drop:'Перетащите фото сюда',or:'или',upload:'Загрузить фото',camera:'Камера',demoT:'Быстрая демонстрация',
+ era:'Историческая эпоха',style:'Архитектурный стиль',secrets:'Главные секреты',listen:'Слушать',analyzing:'Gemini анализирует…',
+ chatT:'Живой консьерж',chatS:'Спрашивайте что угодно — или нажмите шар и говорите на ходу.',ph:'Спросите гида…',
+ chips:['Расскажи скрытый секрет этого места','Переведи арабскую каллиграфию','Аутентичная еда в 500 м','Лучшие места для фото'],
+ hello:'Салом! Я ваш гид. Что исследуем сегодня?',tap:'Нажмите, чтобы говорить',listening:'Слушаю…',
+ routeT:'Умный планировщик маршрутов',routeS:'Пешеходный маршрут от ИИ под ваше время, бюджет и интересы.',
+ city:'Город',dur:'Длительность',budget:'Бюджет',interests:'Интересы',gen:'Составить маршрут',
+ durs:['Полдня','1 день','3 дня'],ints:['Архитектура','Еда','Ремёсла','Скрытые места'],
+ cities:{Samarkand:'Самарканд',Bukhara:'Бухара',Khiva:'Хива',Tashkent:'Ташкент'},
+ walk:'пешком',tip:'Совет',total:'Всего пешком',map:'Карта маршрута',
+ passT:'Цифровой паспорт наследия',passS:'Сканируйте памятники, собирайте штампы, повышайте уровень и открывайте купоны мастеров.',
+ level:'Уровень',levels:['Путник','Исследователь','Знаток','Хранитель наследия'],stampsT:'Ваши штампы',coupons:'Купоны мастеров',
+ trivia:'Викторина',newQ:'Новый вопрос',visited:'Я был здесь',stamped:'Штамп поставлен',need:'штампов нужно',xp:'XP',
+ keyT:'Подключить Gemini',keyX:'Вставьте GEMINI_API_KEY. Он хранится только в этом браузере и отправляется только в Google.',save:'Сохранить',clear:'Удалить',
+ noKey:'Сначала добавьте ключ Gemini API.',saved:'Ключ сохранён',cleared:'Ключ удалён',
+ micSecure:'Для микрофона нужна защищённая страница. Откройте приложение по ссылке https:// в Chrome (не из файла или Telegram).',micDenied:'Микрофон заблокирован. Разрешите доступ в настройках сайта и повторите.',errBusy:'Gemini сейчас перегружен. Повторите через несколько секунд.',errQuota:'Лимит Gemini исчерпан — повторите через минуту.',errKey:'Gemini отклонил ключ. Проверьте его в настройках.',errNet:'Проблема с сетью. Повторите.',errGen:'Что-то пошло не так.',
+ notImg:'Выберите файл изображения.',noVoice:'Распознавание речи не поддерживается (используйте Chrome).',camErr:'Камера недоступна — загрузите фото.',
+ stampNew:'Новый штамп получен!',correct:'Верно! +20 XP',wrong:'Не совсем',bad:'ИИ не смог определить объект. Попробуйте более чёткое фото.',
+ sys:'Reply in Russian.',vl:'ru-RU'}
+};
+let lang=store.get('lang','en');
+const t=k=>T[lang][k];
+
+/* ---------- guides ---------- */
+const GUIDES=[
+ {id:'alisher',c:['#D97706','#7c2d12'],badge:{en:'Legends',uz:'Afsonalar',ru:'Легенды'},
+  name:{en:'Alisher — Master Storyteller',uz:'Alisher — Ustoz hikoyachi',ru:'Алишер — Мастер-рассказчик'},
+  desc:{en:'Legends, mysteries and emotional storytelling.',uz:'Afsonalar, sirlar va hissiyotli hikoyalar.',ru:'Легенды, тайны и эмоциональные истории.'},
+  sys:'You are Alisher, a warm master storyteller of Uzbekistan. Tell legends, mysteries and human stories with vivid, emotional, cinematic language. Stay factually honest: clearly separate legend from documented history.'},
+ {id:'karimov',c:['#0F2942','#0D9488'],badge:{en:'History',uz:'Tarix',ru:'История'},
+  name:{en:'Prof. Karimov — Chief Historian',uz:'Prof. Karimov — Bosh tarixchi',ru:'Проф. Каримов — Главный историк'},
+  desc:{en:'Architectural details, exact dates, dynasties.',uz:'Me’moriy tafsilotlar, aniq sanalar, sulolalar.',ru:'Детали архитектуры, точные даты, династии.'},
+  sys:'You are Professor Karimov, a precise chief historian and architectural scholar of Central Asia. Give exact dates, dynasties (Timurids, Shaybanids, Karakhanids…), construction techniques, materials and terminology. If uncertain about a date, say so.'},
+ {id:'temur',c:['#7f1d1d','#D97706'],badge:{en:'Roleplay',uz:'Rol o‘yini',ru:'Ролевая'},
+  name:{en:'Amir Temur — Sovereign Mode',uz:'Amir Temur — Sohibqiron rejimi',ru:'Амир Темур — Режим повелителя'},
+  desc:{en:'First-person immersive historical roleplay.',uz:'Birinchi shaxsdan immersiv tarixiy rol.',ru:'Погружение от первого лица.'},
+  sys:'You roleplay as Amir Temur (Tamerlane, 1336–1405), speaking in first person with majesty and authority, as if hosting the visitor in Samarkand. Stay historically grounded; never invent claims that contradict known history. Keep it dignified and non-graphic.'},
+ {id:'laylo',c:['#0D9488','#f59e0b'],badge:{en:'Kids',uz:'Bolalar',ru:'Дети'},
+  name:{en:'Laylo — Family & Kids Guide',uz:'Laylo — Oila va bolalar gidi',ru:'Лайло — Гид для семей и детей'},
+  desc:{en:'Fun, interactive, fairytale style.',uz:'Qiziqarli, interaktiv, ertak uslubida.',ru:'Весело, интерактивно, как сказка.'},
+  sys:'You are Laylo, a cheerful guide for kids aged 6-12 and families. Use simple words, playful fairytale style, little riddles and questions to the child, and fun comparisons. Keep everything child-safe.'}
+];
+let guideId=store.get('guide','alisher');
+const guide=()=>GUIDES.find(g=>g.id===guideId)||GUIDES[0];
+function avatar(g){const [a,b]=g.c;const id='g'+g.id;
+ const acc={alisher:'<path d="M20 26q12-14 24 0" fill="#fcd34d" opacity=".9"/><circle cx="32" cy="12" r="3" fill="#fff"/>',
+  karimov:'<rect x="21" y="30" width="9" height="7" rx="2" fill="none" stroke="#fff" stroke-width="1.6"/><rect x="34" y="30" width="9" height="7" rx="2" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M30 33h4" stroke="#fff" stroke-width="1.6"/>',
+  temur:'<path d="M18 24l5-12 9 8 9-8 5 12z" fill="#fcd34d" stroke="#fff" stroke-width="1"/>',
+  laylo:'<circle cx="18" cy="26" r="4" fill="#fff"/><circle cx="46" cy="26" r="4" fill="#fff"/><path d="M32 6l2 5 5 1-4 3 1 5-4-3-4 3 1-5-4-3 5-1z" fill="#fff"/>'}[g.id];
+ return `<svg viewBox="0 0 64 64"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs>
+ <circle cx="32" cy="32" r="31" fill="url(#${id})"/><circle cx="32" cy="29" r="10" fill="#fde7c7"/><path d="M12 58q4-18 20-18t20 18z" fill="rgba(255,255,255,.88)"/>${acc}</svg>`}
+
+/* ---------- monuments (demo + passport) ---------- */
+const MON=[
+ {id:'registan',city:'Samarkand',n:{en:'Registan Square',uz:'Registon maydoni',ru:'Площадь Регистан'},g:['#0F2942','#0D9488'],k:/registan|registon|регистан/i,svg:'dome'},
+ {id:'shah',city:'Samarkand',n:{en:'Shah-i-Zinda',uz:'Shohizinda',ru:'Шахи-Зинда'},g:['#0D9488','#134e4a'],k:/shah.?i.?zinda|shohi.?zinda|шахи.?зинда/i,svg:'arch'},
+ {id:'kalon',city:'Bukhara',n:{en:'Kalon Minaret',uz:'Kalon minorasi',ru:'Минарет Калян'},g:['#D97706','#7c2d12'],k:/kalon|kalyan|калян|калон/i,svg:'tower'},
+ {id:'itchan',city:'Khiva',n:{en:'Itchan Kala',uz:'Ichan Qal’a',ru:'Ичан-Кала'},g:['#92400e','#0F2942'],k:/itchan|ichan|ичан/i,svg:'wall'},
+ {id:'gur',city:'Samarkand',n:{en:'Gur-i-Amir',uz:'Go‘ri Amir',ru:'Гур-Эмир'},g:['#1e3a8a','#0ea5e9'],k:/gur.?i.?amir|go.?ri amir|гур.?эмир/i,svg:'dome'},
+ {id:'ark',city:'Bukhara',n:{en:'Ark Fortress',uz:'Ark qal’asi',ru:'Крепость Арк'},g:['#78350f','#b45309'],k:/\bark\b|арк/i,svg:'wall'},
+ {id:'kukh',city:'Khiva',n:{en:'Kalta Minor',uz:'Kalta minor',ru:'Калта-Минор'},g:['#0891b2','#0F2942'],k:/kalta|калта/i,svg:'tower'},
+ {id:'khast',city:'Tashkent',n:{en:'Khast-Imam',uz:'Hazrati Imom',ru:'Хазрати-Имам'},g:['#047857','#D97706'],k:/khast|hazrati|хазрати|хаст/i,svg:'arch'}
+];
+const DEMO=MON.slice(0,4);
+function monSvg(m){const [a,b]=m.g;const id='m'+m.id;
+ const shapes={
+ dome:'<ellipse cx="100" cy="115" rx="46" ry="52" fill="#fff" opacity=".18"/><rect x="58" y="150" width="84" height="70" fill="#fff" opacity=".14"/><path d="M100 60v-18" stroke="#fcd34d" stroke-width="3"/>',
+ arch:'<path d="M45 230V120a55 55 0 0 1 110 0v110z" fill="#fff" opacity=".16"/><path d="M68 230V126a32 32 0 0 1 64 0v104z" fill="#000" opacity=".25"/>',
+ tower:'<rect x="82" y="50" width="36" height="180" fill="#fff" opacity=".18"/><path d="M76 50h48l-8-22h-32z" fill="#fff" opacity=".28"/><g stroke="#fff" opacity=".35"><path d="M82 90h36M82 130h36M82 170h36"/></g>',
+ wall:'<path d="M20 230v-90h160v90z" fill="#fff" opacity=".16"/><g fill="#fff" opacity=".28"><rect x="30" y="120" width="18" height="24"/><rect x="66" y="120" width="18" height="24"/><rect x="102" y="120" width="18" height="24"/><rect x="138" y="120" width="18" height="24"/></g><rect x="150" y="70" width="22" height="80" fill="#fff" opacity=".2"/>'};
+ return `<svg viewBox="0 0 200 260" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="200" height="260" fill="url(#${id})"/><circle cx="160" cy="46" r="18" fill="#fcd34d" opacity=".35"/>${shapes[m.svg]}</svg>`}
+
+/* ---------- toast ---------- */
+function toast(msg,type=''){const d=document.createElement('div');d.className='toast '+type;d.innerHTML=`<span>${type==='err'?'⚠️':type==='ok'?'✓':'ℹ️'}</span><span>${esc(msg)}</span>`;
+ $('#toasts').appendChild(d);setTimeout(()=>{d.style.transition='.3s';d.style.opacity=0;setTimeout(()=>d.remove(),300)},3800)}
+
+/* ---------- Gemini ---------- */
+class NoKey extends Error{}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function gemini({system,contents,json=false,temp=.8}){
+ const key=getKey();if(!key){openKey();throw new NoKey()}
+ const saved=(()=>{try{return localStorage.getItem('meros_model')||''}catch{return''}})();
+ const list=[...new Set([saved,...MODELS].filter(Boolean))];
+ let lastErr='',busy=false;
+ for(let round=0;round<4;round++){
+  busy=false;
+  for(const model of list){
+   for(const think of [true,false]){
+    const body={systemInstruction:{parts:[{text:system}]},contents,
+     generationConfig:{temperature:temp,...(think?{thinkingConfig:{thinkingBudget:0}}:{}),...(json?{responseMimeType:'application/json'}:{})}};
+    let r;
+    try{r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+     {method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},body:JSON.stringify(body)})}
+    catch{throw new Error(t('errNet'))}
+    if(r.ok){
+     const d=await r.json();
+     const txt=d.candidates?.[0]?.content?.parts?.map(p=>p.text||'').join('')||'';
+     if(!txt){lastErr='empty';busy=true;break}
+     try{localStorage.setItem('meros_model',model)}catch{}
+     return txt}
+    let m='';try{m=(await r.json()).error?.message||''}catch{}
+    if(r.status===401||r.status===403||(r.status===400&&/api key/i.test(m)))throw new Error(t('errKey'));
+    if(think&&r.status===400&&/thinking/i.test(m))continue;
+    lastErr=m;
+    if(r.status===503||r.status===500||r.status===429||/high demand|overloaded|unavailable|quota/i.test(m)){busy=true;if(r.status===429&&/quota|billing/i.test(m)&&!/per minute/i.test(m))lastErr='quota';break}
+    if(r.status===404||/no longer available|not found|not supported|deprecated/i.test(m))break;
+    throw new Error(m?`${t('errGen')} ${m.slice(0,140)}`:t('errGen'));
+   }
+  }
+  if(!busy)break;
+  if(round<3){toast(t('errBusy'),'warn');await sleep(1500*(round+1))}
+ }
+ if(busy)throw new Error(lastErr==='quota'?t('errQuota'):t('errBusy'));
+ throw new Error(lastErr?`${t('errGen')} ${lastErr.slice(0,140)}`:t('errGen'))}
+async function geminiStream({system,contents,onChunk}){
+ const key=getKey();if(!key){openKey();throw new NoKey()}
+ let model='';try{model=localStorage.getItem('meros_model')||''}catch{}model=model||MODELS[0];
+ try{
+  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`,
+   {method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},
+    body:JSON.stringify({systemInstruction:{parts:[{text:system}]},contents,generationConfig:{temperature:.8}})});
+  if(!r.ok||!r.body)throw 0;
+  const rd=r.body.getReader(),dec=new TextDecoder();let buf='',full='';
+  for(;;){const{done,value}=await rd.read();if(done)break;buf+=dec.decode(value,{stream:true});
+   let i;while((i=buf.indexOf('\n'))>=0){const line=buf.slice(0,i).trim();buf=buf.slice(i+1);
+    if(!line.startsWith('data:'))continue;const js=line.slice(5).trim();if(!js||js==='[DONE]')continue;
+    try{const d=JSON.parse(js);const tx=d.candidates?.[0]?.content?.parts?.map(p=>p.text||'').join('')||'';if(tx){full+=tx;onChunk&&onChunk(full)}}catch{}}}
+  if(full)return full;throw 0}
+ catch(e){if(e instanceof NoKey)throw e;return gemini({system,contents})}}
+function parseJSON(s){try{return JSON.parse(s)}catch{const m=s.match(/\{[\s\S]*\}/);if(m)return JSON.parse(m[0]);throw new Error(t('errGen'))}}
+const fail=e=>{if(!(e instanceof NoKey))toast(e.message||t('errGen'),'err')};
+const sysFor=extra=>`${guide().sys}\n${t('sys')} You are the AI guide inside "Meros-AI", a cultural tourism app for Uzbekistan. ${extra||''}`;
+
+/* ---------- speech (TTS) ---------- */
+const sp={chunks:[],i:0,playing:false,rate:1,title:'',cur:null};
+const hasTTS='speechSynthesis' in window;
+function pickVoice(){const v=speechSynthesis.getVoices();const code=T[lang].vl;
+ return v.find(x=>x.lang===code)||v.find(x=>x.lang.startsWith(code.slice(0,2)))||(lang==='uz'?v.find(x=>x.lang.startsWith('tr'))||v.find(x=>x.lang.startsWith('ru')):null)||null}
+function chunk(text){const out=[];(text.replace(/\s+/g,' ').match(/[^.!?…]+[.!?…]*/g)||[text]).forEach(s=>{
+ s=s.trim();while(s.length>180){let k=s.lastIndexOf(',',180);if(k<60)k=s.lastIndexOf(' ',180);out.push(s.slice(0,k+1));s=s.slice(k+1).trim()}if(s)out.push(s)});return out}
+function playChunk(){if(!sp.playing)return;if(sp.i>=sp.chunks.length){sp.playing=false;sp.i=0;uiPlayer();return}
+ const u=new SpeechSynthesisUtterance(sp.chunks[sp.i]);const v=pickVoice();if(v)u.voice=v;u.lang=v?.lang||T[lang].vl;u.rate=sp.rate;
+ u.onend=()=>{if(sp.playing&&sp.cur===u){sp.i++;playChunk()}};u.onerror=()=>{};sp.cur=u;speechSynthesis.speak(u)}
+function speak(text,title){if(!hasTTS){toast('Text-to-speech not supported','warn');return}
+ speechSynthesis.cancel();sp.chunks=chunk(text);sp.i=0;sp.title=title||'Meros-AI';sp.playing=true;
+ if(!pickVoice()&&speechSynthesis.getVoices().length&&lang==='uz')toast('No Uzbek voice on this device — using a fallback voice.','warn');
+ uiPlayer();playChunk()}
+function pauseResume(){if(!sp.chunks.length)return;if(sp.playing){sp.playing=false;speechSynthesis.cancel()}else{sp.playing=true;playChunk()}uiPlayer()}
+function stopSpeak(){sp.playing=false;sp.chunks=[];speechSynthesis.cancel();uiPlayer()}
+const ICON={play:'<svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>',pause:'<svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>'};
+function uiPlayer(){const p=$('#player');p.classList.toggle('show',sp.chunks.length>0);p.classList.toggle('playing',sp.playing);
+ $('#ppBtn').innerHTML=sp.playing?ICON.pause:ICON.play;$('#plTitle').textContent=sp.title;$('#spdBtn').textContent=sp.rate+'x'}
+$('#viz').innerHTML=Array.from({length:28},(_,i)=>`<s style="animation-delay:${(i*83)%700}ms;animation-duration:${600+(i*137)%500}ms"></s>`).join('');
+$('#ppBtn').onclick=pauseResume;$('#plClose').onclick=stopSpeak;
+$('#spdBtn').onclick=()=>{sp.rate=sp.rate===1?1.25:1;if(sp.playing){speechSynthesis.cancel();playChunk()}uiPlayer()};
+if(hasTTS)speechSynthesis.onvoiceschanged=()=>{};
+
+/* ---------- navigation ---------- */
+const TABS=[
+ {id:'scan',svg:'<path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><circle cx="12" cy="12" r="3.5"/>'},
+ {id:'chat',svg:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/>'},
+ {id:'route',svg:'<circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h5.5"/>'},
+ {id:'pass',svg:'<rect x="5" y="3" width="14" height="18" rx="2.5"/><circle cx="12" cy="10" r="3"/><path d="M9 16h6"/>'}];
+let tab=store.get('tab','scan');
+const ico=s=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${s}</svg>`;
+function renderNav(){const mk=cls=>TABS.map((x,i)=>`<button class="${tab===x.id?'on':''}" data-t="${x.id}">${ico(x.svg)}<span>${t('tabs')[i]}</span></button>`).join('');
+ $('#side').innerHTML=mk();$('#bottom').innerHTML=mk();
+ document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{tab=b.dataset.t;store.set('tab',tab);renderNav();renderView()});
+ document.querySelectorAll('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===lang));
+ document.documentElement.lang=lang}
+document.querySelectorAll('#lang button').forEach(b=>b.onclick=()=>{lang=b.dataset.l;store.set('lang',lang);if(sp.playing)stopSpeak();chatMsgs=[];renderNav();renderView();renderKeyModal()});
+
+/* ---------- guide carousel ---------- */
+function carousel(){return `<div class="label">${t('chooseGuide')}</div><p class="sub">${t('chooseSub')}</p>
+ <div class="carousel">${GUIDES.map(g=>`<button class="guide ${g.id===guideId?'on':''}" data-g="${g.id}">${avatar(g)}<b>${g.name[lang]}</b><small>${g.desc[lang]}</small><span class="badge ${g.id==='alisher'?'b-gold':g.id==='karimov'?'b-lapis':g.id==='temur'?'b-gold':'b-teal'}">${g.badge[lang]}</span></button>`).join('')}</div>`}
+function bindCarousel(){document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{guideId=b.dataset.g;store.set('guide',guideId);chatMsgs=[];
+ document.querySelectorAll('[data-g]').forEach(x=>x.classList.toggle('on',x===b));toast(guide().name[lang],'ok');if(tab==='chat')renderView()})}
+
+/* ---------- view router ---------- */
+function renderView(){const v=$('#view');v.className='wrap enter';v.style.animation='none';void v.offsetWidth;v.style.animation='';
+ ({scan:viewScan,chat:viewChat,route:viewRoute,pass:viewPass})[tab](v);window.scrollTo({top:0})}
+
+/* =============== TAB 1: SCANNER =============== */
+let lastDisc=store.get('lastDisc',null);let scanImg=null;
+function viewScan(v){
+ v.innerHTML=`${carousel()}
+ <h1 class="h-title">${t('scanT')}</h1><p class="sub">${t('scanS')}</p>
+ <div class="drop" id="drop"><div class="ring"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg></div>
+  <b style="font-size:16px">${t('drop')}</b><p class="sub" style="margin:4px 0 14px">${t('or')}</p>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+   <button class="btn pri" id="upBtn">🖼️ ${t('upload')}</button><button class="btn gold" id="camBtn">📷 ${t('camera')}</button></div>
+  <input type="file" id="file" accept="image/*" hidden></div>
+ <div style="height:22px"></div>
+ <div class="label">${t('demoT')}</div>
+ <div class="demos">${DEMO.map(m=>`<button class="demo" data-m="${m.id}">${monSvg(m)}<i class="ph" data-k="${m.id}"></i><em>${m.city.toUpperCase()}</em><span>${m.n[lang]}</span></button>`).join('')}</div>
+ <div id="result" style="margin-top:22px"></div>`;
+ bindCarousel();
+ const drop=$('#drop'),file=$('#file');
+ $('#upBtn').onclick=()=>file.click();$('#camBtn').onclick=openCam;
+ file.onchange=()=>file.files[0]&&handleFile(file.files[0]);
+ ['dragenter','dragover'].forEach(e=>drop.addEventListener(e,x=>{x.preventDefault();drop.classList.add('over')}));
+ ['dragleave','drop'].forEach(e=>drop.addEventListener(e,x=>{x.preventDefault();drop.classList.remove('over')}));
+ drop.addEventListener('drop',x=>{const f=x.dataTransfer.files[0];f&&handleFile(f)});
+ document.querySelectorAll('.demo .ph').forEach(e=>cityImg(e.dataset.k,500).then(u=>setBg(e,u)));
+ document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>scanDemo(MON.find(m=>m.id===b.dataset.m)));
+ if(lastDisc&&lastDisc.lang===lang)showDisc(lastDisc,lastDisc.img)}
+function skeleton(){return `<div class="glass pad"><div class="sk" style="height:180px"></div><div class="sk" style="height:30px;width:60%;margin-top:16px"></div><div class="sk" style="height:16px;margin-top:12px"></div><div class="sk" style="height:16px;width:80%;margin-top:8px"></div><p class="sub" style="margin-top:14px">${t('analyzing')}</p></div>`}
+const SCHEMA=`Return ONLY JSON: {"recognized":boolean,"name":string,"location":string (city, country),"era":string (e.g. "Timurid, 15th century"),"style":string (architectural/artistic style),"secrets":[3 short, fascinating, factual strings],"narration":string (a 80-110 word spoken narration in your persona's voice, no markdown, no emojis)}. If the image is not a heritage object, set recognized=false and explain briefly in "narration".`;
+function handleFile(f){if(!f.type.startsWith('image/'))return toast(t('notImg'),'err');
+ const rd=new FileReader();rd.onload=()=>shrink(rd.result,d=>scanImage(d));rd.readAsDataURL(f)}
+function shrink(src,cb){const im=new Image();im.onload=()=>{const M=800,s=Math.min(1,M/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.8))};im.src=src}
+async function scanImage(dataUrl){
+ if(!getKey())return openKey();
+ const r=$('#result');r.innerHTML=skeleton();r.scrollIntoView({behavior:'smooth',block:'start'});
+ try{const txt=await gemini({system:sysFor(SCHEMA),json:true,temp:.6,contents:[{role:'user',parts:[{text:'Identify this object/monument and create the discovery card.'},{inline_data:{mime_type:'image/jpeg',data:dataUrl.split(',')[1]}}]}]});
+  finishScan(parseJSON(txt),dataUrl)}catch(e){r.innerHTML='';fail(e)}}
+async function scanDemo(m){
+ const ck=`scan:${m.id}:${lang}:${guideId}`;const hit=store.get(ck,null);
+ if(hit){finishScan({...hit},null,m);$('#result').scrollIntoView({behavior:'smooth',block:'start'});return}
+ if(!getKey())return openKey();
+ const r=$('#result');r.innerHTML=skeleton();r.scrollIntoView({behavior:'smooth',block:'start'});
+ try{const txt=await gemini({system:sysFor(SCHEMA),json:true,temp:.6,contents:[{role:'user',parts:[{text:`The visitor is standing at: ${m.n.en}, ${m.city}, Uzbekistan. Create the discovery card (recognized=true).`}]}]});
+  finishScan(parseJSON(txt),null,m)}catch(e){r.innerHTML='';fail(e)}}
+function finishScan(d,img,mon){
+ if(!d.recognized){$('#result').innerHTML='';toast(t('bad'),'warn');return}
+ if(mon)store.set(`scan:${mon.id}:${lang}:${guideId}`,d);
+ d.lang=lang;d.img=img&&img.length<1.5e6?img:null;d.monId=mon?.id||(MON.find(m=>m.k.test(d.name||''))||{}).id||null;
+ lastDisc=d;store.set('lastDisc',{...d,img:null});
+ showDisc(d,img);addStamp(d);speak(d.narration,d.name)}
+function showDisc(d,img){const m=d.monId&&MON.find(x=>x.id===d.monId);
+ $('#result').innerHTML=`<div class="glass pad disc enter">
+  ${img?`<img class="preview" src="${img}" alt="">`:m?`<div style="height:150px;border-radius:18px;overflow:hidden;position:relative">${monSvg(m)}<i class="ph" id="dph"></i></div>`:''}
+  <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><span class="badge b-gold">⏳ ${esc(d.era)}</span><span class="badge b-teal">🏛 ${esc(d.style)}</span><span class="badge b-lapis">📍 ${esc(d.location)}</span></div>
+  <h2>${esc(d.name)}</h2>
+  <div class="label" style="margin-top:16px">${t('secrets')}</div>
+  ${(d.secrets||[]).map((s,i)=>`<div class="secret"><i>${i+1}</i><span>${esc(s)}</span></div>`).join('')}
+  <button class="btn pri" id="listenBtn" style="margin-top:14px">🎧 ${t('listen')}</button></div>`;
+ if(m)cityImg(m.id,960).then(u=>setBg($('#dph'),u));
+ $('#listenBtn').onclick=()=>speak(d.narration,d.name)}
+
+/* camera */
+let camStream=null;
+async function openCam(){if(!window.isSecureContext){toast(t('camErr'),'warn');return $('#file').click()}try{camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});$('#cam').srcObject=camStream;$('#camModal').classList.add('show')}catch{toast(t('camErr'),'err');$('#file').click()}}
+function closeCam(){camStream?.getTracks().forEach(x=>x.stop());camStream=null;$('#camModal').classList.remove('show')}
+$('#camClose').onclick=closeCam;
+$('#camShot').onclick=()=>{const v=$('#cam');const c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);const u=c.toDataURL('image/jpeg',.9);closeCam();shrink(u,scanImage)};
+
+/* =============== TAB 2: CHAT =============== */
+let chatMsgs=[];let rec=null,listening=false;
+function viewChat(v){
+ v.innerHTML=`${carousel()}<h1 class="h-title">${t('chatT')}</h1><p class="sub">${t('chatS')}</p>
+ <div class="glass pad"><div class="chatbox" id="box"></div></div>
+ <div class="orbwrap"><button class="orb" id="orb" aria-label="voice"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button></div>
+ <p class="sub" style="text-align:center;margin:0 0 10px" id="orbtxt">${t('tap')}</p>
+ <div class="chips">${t('chips').map(c=>`<button class="chip" data-c="${esc(c)}">${esc(c)}</button>`).join('')}</div>
+ <form class="composer" id="form"><input id="inp" placeholder="${t('ph')}" autocomplete="off"><button class="btn pri" aria-label="send">➤</button></form>`;
+ bindCarousel();
+ if(!chatMsgs.length)chatMsgs.push({r:'a',t:t('hello')});
+ drawChat();
+ document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>sendChat(b.dataset.c));
+ $('#form').onsubmit=e=>{e.preventDefault();const x=$('#inp').value.trim();if(x){$('#inp').value='';sendChat(x)}};
+ $('#orb').onclick=toggleVoice}
+function drawChat(typing){const b=$('#box');if(!b)return;
+ b.innerHTML=chatMsgs.map((m,i)=>`<div class="msg ${m.r}">${md(m.t)}${m.r==='a'?`<br><button class="spk" data-s="${i}">🔊 ${t('listen')}</button>`:''}</div>`).join('')+(typing?'<div class="msg a typing"><span></span><span></span><span></span></div>':'');
+ b.querySelectorAll('[data-s]').forEach(x=>x.onclick=()=>speak(chatMsgs[x.dataset.s].t,guide().name[lang]));
+ b.lastElementChild?.scrollIntoView({behavior:'smooth',block:'nearest'})}
+async function sendChat(text,voice){
+ if(!getKey())return openKey();
+ chatMsgs.push({r:'u',t:text});drawChat(true);
+ const ctx=lastDisc?`The visitor most recently scanned: ${lastDisc.name} (${lastDisc.location}). Use this as the "here" context when they say "here" or "nearby". `:'';
+ const contents=chatMsgs.filter((m,i)=>!(i===0&&m.r==='a')).slice(-14).map(m=>({role:m.r==='u'?'user':'model',parts:[{text:m.t}]}));
+ let sm=null;
+ try{const out=await geminiStream({system:sysFor(ctx+'Keep answers under 120 words unless asked for more; conversational, suitable for being read aloud; no emojis; light **bold** allowed. For food/photo spots, suggest well-known types of places and be honest that live location data is unavailable.'),contents,onChunk:full=>{if(!sm){chatMsgs.push({r:'a',t:full});sm=chatMsgs[chatMsgs.length-1]}else sm.t=full;drawChat()}});
+  if(sm)sm.t=out.trim();else chatMsgs.push({r:'a',t:out.trim()});drawChat();if(voice)speak(out,guide().name[lang])}
+ catch(e){if(sm)chatMsgs.pop();chatMsgs.pop();drawChat();$('#inp')&&($('#inp').value=text);fail(e)}}
+function toggleVoice(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return toast(t('noVoice'),'err');
+ if(listening){rec?.stop();return}
+ if(!window.isSecureContext)return toast(t('micSecure'),'err');
+ stopSpeak();rec=new SR();rec.lang=T[lang].vl;rec.interimResults=true;rec.maxAlternatives=1;let final='';
+ rec.onstart=()=>{listening=true;$('#orb')?.classList.add('live');$('#orbtxt')&&($('#orbtxt').textContent=t('listening'))};
+ rec.onresult=e=>{let s='';for(const r of e.results){s+=r[0].transcript;if(r.isFinal)final=s}$('#orbtxt')&&($('#orbtxt').textContent='“'+s+'”')};
+ rec.onerror=e=>{if(e.error==='not-allowed')toast(t('micDenied'),'err');else if(e.error!=='no-speech'&&e.error!=='aborted')toast('Voice: '+e.error,'warn')};
+ rec.onend=()=>{listening=false;$('#orb')?.classList.remove('live');$('#orbtxt')&&($('#orbtxt').textContent=t('tap'));if(final.trim())sendChat(final.trim(),true)};
+ try{rec.start()}catch{}}
+
+/* =============== CITY PHOTOS (Wikipedia REST, cached) =============== */
+const WIKI={Samarkand:['Samarkand','Registan'],Bukhara:['Bukhara','Po-i-Kalyan'],Khiva:['Khiva','Itchan_Kala'],Tashkent:['Tashkent','Khast_Imam_Complex'],
+ registan:['Registan'],shah:['Shah-i-Zinda'],kalon:['Po-i-Kalyan','Kalyan_Minaret'],itchan:['Itchan_Kala'],gur:['Gur-e_Amir','Gur-i_Amir'],ark:['Ark_of_Bukhara'],kukh:['Kalta_Minor_Minaret','Kalta_Minor'],khast:['Khast_Imam_Complex','Hazrati_Imam_Complex']};
+const imgMem={};const imgPending={};
+const thumb=(u,w)=>u.replace(/\/\d+px-/,`/${w}px-`);   // Wikimedia standard sizes: 250, 330, 500, 960
+function baseThumb(city){
+ if(imgMem[city])return Promise.resolve(imgMem[city]);
+ const c=store.get('cityimg2',{});if(c[city]){imgMem[city]=c[city];return Promise.resolve(c[city])}
+ if(imgPending[city])return imgPending[city];
+ return imgPending[city]=(async()=>{
+  for(const title of WIKI[city]||[city]){
+   const ac=new AbortController(),to=setTimeout(()=>ac.abort(),5000);
+   try{const r=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+title,{signal:ac.signal});clearTimeout(to);if(!r.ok)continue;const d=await r.json();
+    const u=d.thumbnail?.source||d.originalimage?.source;
+    if(u){imgMem[city]=u;const cc=store.get('cityimg2',{});cc[city]=u;store.set('cityimg2',cc);return u}}catch{clearTimeout(to)}}
+  return null})()}
+async function cityImg(city,w=500){const u=await baseThumb(city);return u?thumb(u,w):null}
+function setBg(el,url){if(!el||!url)return;const im=new Image();im.decoding='async';im.onload=()=>{el.style.backgroundImage=`url("${url}")`;el.classList.add('ph-on')};im.src=url}
+/* warm everything in parallel at startup so the Route tab opens with photos already cached */
+function prefetchCities(){Object.keys(WIKI).filter(k=>/^[A-Z]/.test(k)||['registan','shah','kalon','itchan'].includes(k)).forEach(c=>cityImg(c,500).then(u=>{if(u)new Image().src=u}))}
+
+/* =============== TAB 3: ROUTE =============== */
+const RS=store.get('rs',{city:'Samarkand',dur:1,budget:2,ints:['Architecture']});let route=store.get('route',null);
+function viewRoute(v){
+ v.innerHTML=`${carousel()}<h1 class="h-title">${t('routeT')}</h1><p class="sub">${t('routeS')}</p>
+ <div class="glass pad"><div class="label">${t('city')}</div><div class="seg" id="cities">${Object.keys(T.en.cities).map(c=>`<button class="city ${RS.city===c?'on':''}" data-city="${c}"><span>${t('cities')[c]}</span></button>`).join('')}</div>
+  <div class="credit">Photos: Wikipedia / Wikimedia Commons</div>
+  <div class="grid2" style="margin-top:18px"><div><div class="label">${t('dur')}</div><div class="seg">${t('durs').map((d,i)=>`<button class="chip ${RS.dur===i?'on':''}" data-dur="${i}">${d}</button>`).join('')}</div></div>
+  <div><div class="label">${t('budget')}</div><div class="seg">${['$','$$','$$$'].map((d,i)=>`<button class="chip ${RS.budget===i+1?'on':''}" data-bud="${i+1}">${d}</button>`).join('')}</div></div></div>
+  <div class="label" style="margin-top:18px">${t('interests')}</div><div class="seg">${T.en.ints.map((x,i)=>`<button class="chip ${RS.ints.includes(x)?'on':''}" data-int="${x}">${t('ints')[i]}</button>`).join('')}</div>
+  <button class="btn gold" id="gen" style="margin-top:20px;width:100%">✨ ${t('gen')}</button></div>
+ <div id="rout" style="margin-top:20px"></div>`;
+ bindCarousel();
+ document.querySelectorAll('[data-city]').forEach(b=>cityImg(b.dataset.city,500).then(u=>setBg(b,u)));
+ const sv=()=>store.set('rs',RS),rr=()=>viewRouteKeep();
+ document.querySelectorAll('[data-city]').forEach(b=>b.onclick=()=>{RS.city=b.dataset.city;sv();rr()});
+ document.querySelectorAll('[data-dur]').forEach(b=>b.onclick=()=>{RS.dur=+b.dataset.dur;sv();rr()});
+ document.querySelectorAll('[data-bud]').forEach(b=>b.onclick=()=>{RS.budget=+b.dataset.bud;sv();rr()});
+ document.querySelectorAll('[data-int]').forEach(b=>b.onclick=()=>{const x=b.dataset.int;RS.ints=RS.ints.includes(x)?RS.ints.filter(y=>y!==x):[...RS.ints,x];sv();rr()});
+ $('#gen').onclick=genRoute;
+ if(route&&route.lang===lang)drawRoute(route)}
+function viewRouteKeep(){const y=scrollY;viewRoute($('#view'));scrollTo(0,y)}
+async function genRoute(){
+ if(!RS.ints.length)RS.ints=['Architecture'];
+ const ck=`route:${RS.city}:${RS.dur}:${RS.budget}:${[...RS.ints].sort().join()}:${lang}:${guideId}`;const hit=store.get(ck,null);
+ if(hit){route=hit;store.set('route',route);drawRoute(route);return}
+ if(!getKey())return openKey();
+ const r=$('#rout');r.innerHTML=`<div class="glass pad">${[70,50,90,60].map(w=>`<div class="sk" style="height:${w>60?70:46}px;width:${w}%;margin-bottom:14px"></div>`).join('')}</div>`;
+ $('#gen').disabled=true;
+ const durTxt=['half a day (about 4 hours)','1 full day (about 9 hours)','3 days (give a day-by-day plan, 4-5 stops per day)'][RS.dur];
+ const sch=`Return ONLY JSON: {"title":string,"summary":string (max 30 words),"stops":[{"day":number,"time":"HH:MM","name":string,"desc":string (max 28 words),"walkMinutes":number (walk from the previous stop, 0 for the first of each day),"tip":string (an insider tip, max 20 words),"cost":string (e.g. "free" or "~$5")}],"totalWalkMinutes":number}. Use real, well-known places in the city; do not invent places. Be realistic about distances.`;
+ try{const txt=await gemini({system:sysFor(sch),json:true,temp:.7,contents:[{role:'user',parts:[{text:`City: ${RS.city}, Uzbekistan. Duration: ${durTxt}. Budget level: ${'$'.repeat(RS.budget)} (of $$$). Interests: ${RS.ints.join(', ')}. Build the walking itinerary.`}]}]});
+  route=parseJSON(txt);route.lang=lang;store.set('route',route);store.set(ck,route);drawRoute(route)}
+ catch(e){r.innerHTML='';fail(e)}finally{const g=$('#gen');if(g)g.disabled=false}}
+function drawRoute(R){const r=$('#rout');if(!r)return;const S=R.stops||[];
+ const n=S.length;const pts=S.map((s,i)=>({x:50+(i%2?1:0)*0+ (i*(300/Math.max(1,n-1))) ,y:0}));
+ const W=360,H=Math.max(160,60+n*18);
+ const P=S.map((s,i)=>({x:30+(n>1?i*(W-60)/(n-1):150),y:H/2+Math.sin(i*1.3)*(H/2-34)}));
+ const path=P.map((p,i)=>i?`${i===1?'M'+P[0].x+' '+P[0].y+' ':''}L${p.x} ${p.y}`:'').join(' ');
+ let day=0;
+ r.innerHTML=`<div class="glass pad enter"><div class="hero" id="hero"><b>${esc(t('cities')[RS.city]||RS.city)}</b></div><div class="label">${esc(R.title||'')}</div><p class="sub" style="margin:0 0 6px">${esc(R.summary||'')}</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px"><span class="badge b-teal">${t('total')}: ${R.totalWalkMinutes??S.reduce((a,s)=>a+(+s.walkMinutes||0),0)} min</span><span class="badge b-gold">${S.length} stops</span></div>
+  <div class="label">${t('map')}</div>
+  <svg class="mapsvg" viewBox="0 0 ${W} ${H}"><path d="${path.replace(/^ /,'')}" fill="none" stroke="#0D9488" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="26" to="0" dur="1.4s" repeatCount="indefinite"/></path>
+  ${P.map((p,i)=>`<g class="pin" data-i="${i}" style="cursor:pointer"><circle cx="${p.x}" cy="${p.y}" r="13" fill="${i===0?'#D97706':i===n-1?'#0D9488':'#0F2942'}" stroke="#fff" stroke-width="3"/><text x="${p.x}" y="${p.y+4}" text-anchor="middle" font-size="11" font-weight="800" fill="#fff" font-family="Plus Jakarta Sans">${i+1}</text></g>`).join('')}</svg>
+  <div class="tl" style="margin-top:18px">${S.map((s,i)=>{let h='';if((s.day||1)!==day&&(s.day||1)>0&&R.stops.some(x=>x.day>1)){day=s.day||1;h=`<h3 class="serif" style="margin:6px 0 12px;margin-left:-34px;font-size:22px">Day ${day}</h3>`}else day=s.day||1;
+   return `${h}${i&&+s.walkMinutes?`<div class="walk">🚶 ${s.walkMinutes} min ${t('walk')}</div>`:''}<div class="stop" id="st${i}" style="animation-delay:${i*60}ms"><div class="dot">${i+1}</div>
+   <div class="glass pad" style="padding:14px"><div style="display:flex;justify-content:space-between;gap:8px"><b class="serif" style="font-size:18px">${esc(s.name)}</b><span class="badge b-lapis">${esc(s.time||'')}</span></div>
+   <p style="margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--ink2)">${esc(s.desc)}</p>
+   <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${s.cost?`<span class="badge b-teal">${esc(s.cost)}</span>`:''}</div>
+   ${s.tip?`<div class="tip">💡 <b>${t('tip')}:</b> ${esc(s.tip)}</div>`:''}</div></div>`}).join('')}</div></div>`;
+ cityImg(RS.city,960).then(u=>setBg($('#hero'),u));
+ r.querySelectorAll('.pin').forEach(p=>p.onclick=()=>{const el=$('#st'+p.dataset.i);el.scrollIntoView({behavior:'smooth',block:'center'});el.firstElementChild.nextElementSibling.animate([{transform:'scale(1.03)'},{transform:'none'}],{duration:500})})}
+
+/* =============== TAB 4: PASSPORT =============== */
+let P=store.get('pp',{stamps:[],xp:0});
+const LV=[0,3,6,10];
+const COUPONS=[{n:3,t:{en:'10% off Rishtan ceramics',uz:'Rishton kulolchiligiga 10% chegirma',ru:'−10% на ришданскую керамику'},code:'MEROS-RISHTAN10',ic:'🏺'},
+ {n:5,t:{en:'15% off Margilan silk & ikat',uz:'Marg‘ilon ipak va atlasiga 15%',ru:'−15% на маргиланский шёлк и икат'},code:'MEROS-IKAT15',ic:'🧵'},
+ {n:8,t:{en:'20% off Bukhara suzani & gold-embroidery',uz:'Buxoro suzana va zardo‘zligiga 20%',ru:'−20% на бухарские сюзане и золотое шитьё'},code:'MEROS-SUZANI20',ic:'🪡'}];
+const savePP=()=>store.set('pp',P);
+function addStamp(d){const id=d.monId||('x:'+(d.name||'').toLowerCase().slice(0,40));if(P.stamps.some(s=>s.id===id))return;
+ P.stamps.push({id,name:d.name,city:d.location,date:new Date().toISOString().slice(0,10)});P.xp+=30;savePP();toast(t('stampNew')+' — '+d.name,'ok')}
+function levelOf(){const c=P.stamps.length;let l=0;LV.forEach((x,i)=>{if(c>=x)l=i});return l}
+function viewPass(v){const c=P.stamps.length,l=levelOf(),next=LV[l+1],pct=next?Math.min(100,(c-LV[l])/(next-LV[l])*100):100;
+ const custom=P.stamps.filter(s=>s.id.startsWith('x:'));
+ v.innerHTML=`<h1 class="h-title">${t('passT')}</h1><p class="sub">${t('passS')}</p>
+ <div class="passport"><div class="label" style="color:#fcd34d">UZBEKISTAN · MEROS</div><h2 class="serif" style="font-size:30px;margin:2px 0">${t('levels')[l]}</h2>
+  <div style="opacity:.8;font-size:13px">${t('level')} ${l+1} · ${P.xp} ${t('xp')} · ${c} ${t('stampsT').toLowerCase()}</div><div class="bar"><i style="width:${pct}%"></i></div></div>
+ <div class="label" style="margin-top:24px">${t('stampsT')}</div>
+ <div class="stamps">${MON.map(m=>{const got=P.stamps.some(s=>s.id===m.id);return `<div class="stamp ${got?'got':''}"><div class="sph">${monSvg(m)}<i class="ph" data-k="${m.id}"></i></div><b>${m.n[lang]}</b><small style="color:var(--ink2)">${m.city}</small><br>
+  ${got?`<span class="badge b-gold" style="margin-top:6px">✓ ${t('stamped')}</span>`:`<button class="btn ghost" data-v="${m.id}" style="padding:6px 10px;font-size:12px;margin-top:6px">${t('visited')}</button>`}</div>`}).join('')}
+  ${custom.map(s=>`<div class="stamp got"><div style="font-size:40px">🏛️</div><b>${esc(s.name)}</b><small style="color:var(--ink2)">${esc(s.date)}</small></div>`).join('')}</div>
+ <div class="label" style="margin-top:26px">${t('coupons')}</div>
+ ${COUPONS.map(k=>{const ok=c>=k.n;return `<div class="coupon ${ok?'':'lock'}"><div style="font-size:30px">${ok?k.ic:'🔒'}</div><div style="flex:1"><b>${k.t[lang]}</b><div style="font-size:12px;color:var(--ink2)">${ok?`<code style="background:rgba(217,119,6,.15);padding:2px 8px;border-radius:8px;font-weight:700">${k.code}</code>`:`${k.n} ${t('need')}`}</div></div></div>`}).join('')}
+ <div class="label" style="margin-top:26px">${t('trivia')}</div><div class="glass pad" id="trv"><button class="btn pri" id="newq">🧠 ${t('newQ')}</button></div>`;
+ document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{const m=MON.find(x=>x.id===b.dataset.v);addStamp({monId:m.id,name:m.n[lang],location:m.city});viewPass(v)});
+ document.querySelectorAll('.sph .ph').forEach(e=>cityImg(e.dataset.k,250).then(u=>setBg(e,u)));
+ $('#newq').onclick=newTrivia}
+async function newTrivia(){
+ if(!getKey())return openKey();const box=$('#trv');box.innerHTML=`<div class="sk" style="height:22px;width:80%"></div><div class="sk" style="height:46px;margin-top:12px"></div><div class="sk" style="height:46px;margin-top:8px"></div>`;
+ const lvl=levelOf();
+ try{const txt=await gemini({system:sysFor(`Return ONLY JSON: {"q":string,"options":[4 strings],"answer":number (0-3 index),"fact":string (one-sentence fun fact explaining the answer)}. Topic: history, architecture or crafts of Uzbekistan. Difficulty ${lvl+1} of 4. The question must have exactly one correct, verifiable answer.`),json:true,temp:.9,contents:[{role:'user',parts:[{text:'Random seed: '+Math.random()}]}]});
+  const q=parseJSON(txt);
+  box.innerHTML=`<b style="font-size:16px;line-height:1.4">${esc(q.q)}</b>${q.options.map((o,i)=>`<button class="opt" data-o="${i}">${esc(o)}</button>`).join('')}<div id="fb"></div>`;
+  box.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{const i=+b.dataset.o;box.querySelectorAll('[data-o]').forEach(x=>x.disabled=true);
+   box.querySelector(`[data-o="${q.answer}"]`).classList.add('ok');
+   if(i===q.answer){P.xp+=20;savePP();toast(t('correct'),'ok')}else{b.classList.add('no');toast(t('wrong'),'warn')}
+   $('#fb').innerHTML=`<div class="tip" style="margin-top:12px">💡 ${esc(q.fact)}</div><button class="btn pri" id="nq2" style="margin-top:12px">${t('newQ')}</button>`;$('#nq2').onclick=newTrivia})}
+ catch(e){box.innerHTML=`<button class="btn pri" id="newq">🧠 ${t('newQ')}</button>`;$('#newq').onclick=newTrivia;fail(e)}}
+
+/* ---------- API key modal ---------- */
+function renderKeyModal(){$('#kmTitle').textContent=t('keyT');$('#kmText').textContent=t('keyX');$('#keySave').textContent=t('save');$('#keyClear').textContent=t('clear')}
+function openKey(){renderKeyModal();$('#keyInput').value='';$('#keyModal').classList.add('show');if(!getKey())toast(t('noKey'),'warn');setTimeout(()=>$('#keyInput').focus(),80)}
+$('#keyBtn').onclick=openKey;
+$('#keyModal').onclick=e=>{if(e.target.id==='keyModal')e.currentTarget.classList.remove('show')};
+$('#keySave').onclick=()=>{const k=$('#keyInput').value.trim();if(!k)return;try{localStorage.setItem('meros_key',k)}catch{}$('#keyModal').classList.remove('show');toast(t('saved'),'ok')};
+$('#keyClear').onclick=()=>{try{localStorage.removeItem('meros_key')}catch{}$('#keyModal').classList.remove('show');toast(t('cleared'))};
+window.addEventListener('unhandledrejection',e=>{if(e.reason instanceof NoKey)e.preventDefault()});
+
+/* ---------- boot ---------- */
+renderNav();renderView();renderKeyModal();uiPlayer();
+prefetchCities();
+if(!getKey())setTimeout(()=>{toast(t('noKey'),'warn')},900);
+</script>
+</body>
+</html>
